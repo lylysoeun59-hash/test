@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Grand Hotel</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-image: url('bg1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: rgba(13, 71, 25, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #f39c12;
+        }
+
+        .lang-select {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: none;
+            background-color: #fff;
+            color: #333;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .hero {
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            max-width: 1000px;
+            margin: 2rem auto 0 auto;
+        }
+
+        .hero h1 {
+            margin-bottom: 0.5rem;
+            color: #f39c12;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-width: 1000px;
+            margin: 2.5rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Glassmorphism card styling */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+            width: 100%;
+        }
+
+        .glass-card h2 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            color: #f39c12;
+        }
+
+        .glass-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #f1f1f1;
+        }
+
+        /* Info List */
+        .info-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 1rem;
+        }
+
+        .info-list li {
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-list strong {
+            color: #f39c12;
+        }
+
+        /* Hotel Quick Summary List */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .summary-box {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .summary-box h3 {
+            color: #f39c12;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-box p {
+            font-size: 0.9rem;
+        }
+
+        /* Form Styles */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: #f39c12;
+        }
+
+        .send-btn {
+            background-color: #f39c12;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: background 0.3s ease;
+        }
+
+        .send-btn:hover {
+            background-color: #d35400;
+        }
+
+        /* Map Embed Container */
+        .map-container {
+            width: 100%;
+            height: 350px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Social Media Section */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: #f39c12;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            .send-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Grand Hotel</div>
+        <nav>
+            <a href="index.html" id="nav-home">Home</a>
+            <a href="about us.html" id="nav-about">About Us</a>
+            <a href="book place.html" id="nav-book">Book Place</a>
+            <a href="contact us.html" id="nav-contact">Contact Us</a>
+            
+            <select class="lang-select" id="langSelector" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="km">ភាសាខ្មែរ (Khmer)</option>
+            </select>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1 id="contact-hero-title">Get In Touch With Us</h1>
+        <p id="contact-hero-subtitle">Have questions or need assistance with your booking? We are here 24/7 to help you.</p>
+    </section>
+
+    <main class="content-container">
+
+        <article class="glass-card">
+            <h2 id="summary-title">Before You Reach Out</h2>
+            <p id="summary-intro">Here is a quick overview of our hotel services and policies to assist your inquiry:</p>
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3 id="s1-title">Check-in / Check-out</h3>
+                    <p id="s1-desc">Check-in: 2:00 PM<br>Check-out: 12:00 PM<br>24-Hour Front Desk Support</p>
+                </div>
+                <div class="summary-box">
+                    <h3 id="s2-title">Dining & Breakfast</h3>
+                    <p id="s2-desc">Buffet Breakfast: 6:30 AM - 10:00 AM<br>On-Site Restaurant & Rooftop Lounge</p>
+                </div>
+                <div class="summary-box">
+                    <h3 id="s3-title">Rentals & Tours</h3>
+                    <p id="s3-desc">Motorbike & Bicycle rentals available.<br>Private and group guided tours daily.</p>
+                </div>
+                <div class="summary-box">
+                    <h3 id="s4-title">Transportation</h3>
+                    <p id="s4-desc">Airport pickup/drop-off transfer service upon request.</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="glass-card">
+            <h2 id="info-title">Contact Information</h2>
+            <ul class="info-list">
+                <li><strong>📍 Address:</strong> <span id="info-addr">#123 Pokambor Ave, Riverside, Siem Reap, Cambodia</span></li>
+                <li><strong>📞 Phone / Telegram:</strong> +855 (0) 63 123 456 / +855 (0) 98 765 432</li>
+                <li><strong>✉️ Email:</strong> info@grandhotel.com / booking@grandhotel.com</li>
+                <li><strong>🕒 Service Hours:</strong> 24 Hours / 7 Days a week</li>
+            </ul>
+        </article>
+
+        <article class="glass-card">
+            <h2 id="map-title">Location Map</h2>
+            <p id="map-desc">Find us conveniently located near city landmarks and transport hubs.</p>
+            <div class="map-container">
+                <iframe 
+                    src="https://maps.google.com/maps?q=Siem%20Reap%20Cambodia&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </article>
+
+        <article class="glass-card">
+            <h2 id="form-title">Send Us A Message</h2>
+            <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label id="lbl-name">Your Full Name</label>
+                    <input type="text" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label id="lbl-email">Your Email Address</label>
+                    <input type="email" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label id="lbl-phone">Phone / WhatsApp / Telegram</label>
+                    <input type="tel" placeholder="+855 12 345 678">
+                </div>
+                <div class="form-group">
+                    <label id="lbl-msg">Your Message / Special Requests</label>
+                    <textarea rows="5" required placeholder="Tell us how we can help you..."></textarea>
+                </div>
+                <button type="submit" class="send-btn" id="btn-submit">Submit Message</button>
+            </form>
+        </article>
+
+        <article class="glass-card">
+            <h2 id="social-title">Follow Us On Social Media</h2>
+            <p id="social-desc">Connect with us for daily hotel updates, promotional discounts, and travel guides:</p>
+            <div class="social-links">
+                <a href="https://facebook.com" target="_blank" class="social-btn">Facebook</a>
+                <a href="https://instagram.com" target="_blank" class="social-btn">Instagram</a>
+                <a href="https://t.me" target="_blank" class="social-btn">Telegram Channel</a>
+                <a href="https://tiktok.com" target="_blank" class="social-btn">TikTok</a>
+                <a href="https://youtube.com" target="_blank" class="social-btn">YouTube</a>
+            </div>
+        </article>
+
+    </main>
+
+    <script>
+        const translations = {
+            en: {
+                navHome: "Home",
+                navAbout: "About Us",
+                navBook: "Book Place",
+                navContact: "Contact Us",
+                contactHeroTitle: "Get In Touch With Us",
+                contactHeroSubtitle: "Have questions or need assistance with your booking? We are here 24/7 to help you.",
+                summaryTitle: "Before You Reach Out",
+                summaryIntro: "Here is a quick overview of our hotel services and policies to assist your inquiry:",
+                s1Title: "Check-in / Check-out",
+                s1Desc: "Check-in: 2:00 PM<br>Check-out: 12:00 PM<br>24-Hour Front Desk Support",
+                s2Title: "Dining & Breakfast",
+                s2Desc: "Buffet Breakfast: 6:30 AM - 10:00 AM<br>On-Site Restaurant & Rooftop Lounge",
+                s3Title: "Rentals & Tours",
+                s3Desc: "Motorbike & Bicycle rentals available.<br>Private and group guided tours daily.",
+                s4Title: "Transportation",
+                s4Desc: "Airport pickup/drop-off transfer service upon request.",
+                infoTitle: "Contact Information",
+                infoAddr: "#123 Pokambor Ave, Riverside, Siem Reap, Cambodia",
+                mapTitle: "Location Map",
+                mapDesc: "Find us conveniently located near city landmarks and transport hubs.",
+                formTitle: "Send Us A Message",
+                lblName: "Your Full Name",
+                lblEmail: "Your Email Address",
+                lblPhone: "Phone / WhatsApp / Telegram",
+                lblMsg: "Your Message / Special Requests",
+                btnSubmit: "Submit Message",
+                socialTitle: "Follow Us On Social Media",
+                socialDesc: "Connect with us for daily hotel updates, promotional discounts, and travel guides:"
+            },
+            km: {
+                navHome: "ទំព័រដើម",
+                navAbout: "អំពីយើង",
+                navBook: "កក់កន្លែង",
+                navContact: "ទំនាក់ទំនង",
+                contactHeroTitle: "ទំនាក់ទំនងមកកាន់យើងខ្ញុំ",
+                contactHeroSubtitle: "មានសំណួរ ឬត្រូវការជំនួយក្នុងការកក់បន្ទប់? យើងខ្ញុំរង់ចាំបម្រើលោកអ្នក ២៤ ម៉ោង។",
+                summaryTitle: "ព័ត៌មានសង្ខេបមុនពេលទំនាក់ទំនង",
+                summaryIntro: "នេះជាព័ត៌មានសង្ខេបអំពីសេវាកម្ម និងគោលការណ៍សណ្ឋាគារសម្រាប់ពិនិត្យឡើងវិញ៖",
+                s1Title: "ពេលវេលា ចូល/ចេញ",
+                s1Desc: "ម៉ោងចូល: 2:00 រសៀល<br>ម៉ោងចេញ: 12:00 ថ្ងៃត្រង់<br>សេវាទទួលភ្ញៀវ ២៤ ម៉ោង",
+                s2Title: "អាហារ និងអាហារពេលព្រឹក",
+                s2Desc: "អាហារព្រឹកប៊ូហ្វេ: 6:30 ព្រឹក - 10:00 ព្រឹក<br>ភោជនីយដ្ឋាន និងបារលើដំបូល",
+                s3Title: "ការជួល និងទេសចរណ៍",
+                s3Desc: "មានសេវាកម្មជួលម៉ូតូ និងកង់។<br>ដំណើរកម្សាន្តមានមគ្គុទ្ទេសក៍រៀងរាល់ថ្ងៃ។",
+                s4Title: "សេវាធ្វើដំណើរ",
+                s4Desc: "មានសេវាកម្មទទួល និងជូនដំណើរស្តង់ដារព្រលានយន្តហោះ។",
+                infoTitle: "ព័ត៌មានទំនាក់ទំនង",
+                infoAddr: "ផ្ទះលេខ ១២៣ មហាវិថីពោធិ៍កំបោរ ริมស្ទឹង សៀមរាប កម្ពុជា",
+                mapTitle: "ផែនទីទីតាំង",
+                mapDesc: "ស្វែងរកទីតាំងសណ្ឋាគារយើងខ្ញុំដែលស្ថិតនៅជិតតំបន់ទេសចរណ៍សំខាន់ៗ។",
+                formTitle: "ផ្ញើសារមកកាន់យើង",
+                lblName: "ឈ្មោះពេញរបស់អ្នក",
+                lblEmail: "អាសយដ្ឋានអ៊ីមែល",
+                lblPhone: "លេខទូរស័ព្ទ / WhatsApp / Telegram",
+                lblMsg: "សារ ឬសំណូមពរពិសេស",
+                btnSubmit: "ផ្ញើសារ",
+                socialTitle: "តាមដានយើងនៅលើបណ្តាញសង្គម",
+                socialDesc: "ភ្ជាប់ទំនាក់ទំនងជាមួយយើងដើម្បីទទួលបានព័ត៌មានថ្មីៗ ការបញ្ចុះតម្លៃ និងការណែនាំពីការធ្វើដំណើរ៖"
+            }
+        };
+
+        function changeLanguage() {
+            const selectedLang = document.getElementById("langSelector").value;
+            const langData = translations[selectedLang];
+
+            document.getElementById("nav-home").textContent = langData.navHome;
+            document.getElementById("nav-about").textContent = langData.navAbout;
+            document.getElementById("nav-book").textContent = langData.navBook;
+            document.getElementById("nav-contact").textContent = langData.navContact;
+
+            document.getElementById("contact-hero-title").textContent = langData.contactHeroTitle;
+            document.getElementById("contact-hero-subtitle").textContent = langData.contactHeroSubtitle;
+
+            document.getElementById("summary-title").textContent = langData.summaryTitle;
+            document.getElementById("summary-intro").textContent = langData.summaryIntro;
+
+            document.getElementById("s1-title").textContent = langData.s1Title;
+            document.getElementById("s1-desc").innerHTML = langData.s1Desc;
+
+            document.getElementById("s2-title").textContent = langData.s2Title;
+            document.getElementById("s2-desc").innerHTML = langData.s2Desc;
+
+            document.getElementById("s3-title").textContent = langData.s3Title;
+            document.getElementById("s3-desc").innerHTML = langData.s3Desc;
+
+            document.getElementById("s4-title").textContent = langData.s4Title;
+            document.getElementById("s4-desc").textContent = langData.s4Desc;
+
+            document.getElementById("info-title").textContent = langData.infoTitle;
+            document.getElementById("info-addr").textContent = langData.infoAddr;
+
+            document.getElementById("map-title").textContent = langData.mapTitle;
+            document.getElementById("map-desc").textContent = langData.mapDesc;
+
+            document.getElementById("form-title").textContent = langData.formTitle;
+            document.getElementById("lbl-name").textContent = langData.lblName;
+            document.getElementById("lbl-email").textContent = langData.lblEmail;
+            document.getElementById("lbl-phone").textContent = langData.lblPhone;
+            document.getElementById("lbl-msg").textContent = langData.lblMsg;
+            document.getElementById("btn-submit").textContent = langData.btnSubmit;
+
+            document.getElementById("social-title").textContent = langData.socialTitle;
+            document.getElementById("social-desc").textContent = langData.socialDesc;
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert("Thank you for reaching out to Grand Hotel! Your message has been sent successfully. Our team will get back to you shortly.");
+        }
+    </script>
+
+</body>
+</html>

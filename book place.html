@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Place - Grand Hotel</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-image: url('l.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: rgba(13, 71, 25, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #f39c12;
+        }
+
+        .lang-select {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: none;
+            background-color: #fff;
+            color: #333;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .hero {
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            max-width: 1000px;
+            margin: 2rem auto 0 auto;
+        }
+
+        .hero h1 {
+            margin-bottom: 0.5rem;
+            color: #f39c12;
+        }
+
+        /* Container for cards */
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-width: 1000px;
+            margin: 2.5rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Full-width Glass Card Layout */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.35);
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        .glass-card img {
+            width: 320px;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
+        }
+
+        .glass-card-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .glass-card h2 {
+            font-size: 1.4rem;
+            color: #f39c12;
+        }
+
+        .stars {
+            color: #f1c40f;
+            font-size: 1.1rem;
+        }
+
+        .stars span {
+            color: #ddd;
+            font-size: 0.9rem;
+            margin-left: 5px;
+        }
+
+        .glass-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #f1f1f1;
+        }
+
+        .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .price-tag {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2ecc71;
+        }
+
+        .price-tag span {
+            font-size: 0.85rem;
+            color: #eee;
+            font-weight: normal;
+        }
+
+        .book-btn {
+            background-color: #f39c12;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .book-btn:hover {
+            background-color: #d35400;
+        }
+
+        /* --- POPUP MODAL STYLES --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal-card {
+            background: rgba(20, 45, 25, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 520px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: #f39c12;
+        }
+
+        .qr-box-small {
+            width: 160px;
+            height: 160px;
+            background: #fff;
+            border-radius: 12px;
+            padding: 8px;
+            margin: 10px auto;
+            border: 2px solid #f39c12;
+        }
+
+        .qr-box-small img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .request-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 0.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.35);
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: #f39c12;
+        }
+
+        .confirm-btn {
+            background-color: #f39c12;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .confirm-btn:hover {
+            background-color: #d35400;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .glass-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .glass-card img {
+                width: 100%;
+                height: 200px;
+            }
+            .card-bottom {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Grand Hotel</div>
+        <nav>
+            <a href="index.html" id="nav-home">Home</a>
+            <a href="about us.html" id="nav-about">About Us</a>
+            <a href="book place.html" id="nav-book">Book Place</a>
+            <a href="contact us.html" id="nav-contact">Contact Us</a>
+            
+            <select class="lang-select" id="langSelector" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="km">ភាសាខ្មែរ (Khmer)</option>
+            </select>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1 id="book-hero-title">Book Your Stay</h1>
+        <p id="book-hero-subtitle">Choose from our luxury suites, private villas, or budget rooms with the best price guarantee.</p>
+    </section>
+
+    <main class="content-container">
+
+        <article class="glass-card">
+            <img src="1.jpg" alt="One Bed Room">
+            <div class="glass-card-info">
+                <h2 id="r1-title">Deluxe One Bed Room</h2>
+                <div class="stars">★★★★★ <span>(4.9/5 - 128 Reviews)</span></div>
+                <p id="r1-desc">Perfect for couples or solo travelers. Features a king-sized plush bed, private balcony with city views, high-speed Wi-Fi, and complimentary breakfast.</p>
+                <div class="card-bottom">
+                    <div class="price-tag">$45 <span>/ night</span></div>
+                    <button class="book-btn" onclick="openBooking('Deluxe One Bed Room')" id="r1-btn">Book Now</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="glass-card">
+            <img src="2.jpg" alt="Two Bed Room">
+            <div class="glass-card-info">
+                <h2 id="r2-title">Executive Two Bed Room</h2>
+                <div class="stars">★★★★☆ <span>(4.7/5 - 95 Reviews)</span></div>
+                <p id="r2-desc">Spacious room with two queen beds, modern workstation, marble bathroom with bathtub, and full access to our rooftop lounge.</p>
+                <div class="card-bottom">
+                    <div class="price-tag">$75 <span>/ night</span></div>
+                    <button class="book-btn" onclick="openBooking('Executive Two Bed Room')" id="r2-btn">Book Now</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="glass-card">
+            <img src="family.jpg" alt="Family Room">
+            <div class="glass-card-info">
+                <h2 id="r3-title">Grand Family Suite</h2>
+                <div class="stars">★★★★★ <span>(4.9/5 - 160 Reviews)</span></div>
+                <p id="r3-desc">Designed for comfort and privacy with separate sleeping areas, 1 king bed, 2 twin beds, a cozy living room, and free kids' breakfast meals.</p>
+                <div class="card-bottom">
+                    <div class="price-tag">$120 <span>/ night</span></div>
+                    <button class="book-btn" onclick="openBooking('Grand Family Suite')" id="r3-btn">Book Now</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="glass-card">
+            <img src="dorm.jpg" alt="Dorm Room">
+            <div class="glass-card-info">
+                <h2 id="r4-title">Backpacker Shared Dorm Room</h2>
+                <div class="stars">★★★★☆ <span>(4.6/5 - 210 Reviews)</span></div>
+                <p id="r4-desc">Ideal for backpackers and social travelers. Features comfortable bunk beds with private privacy curtains, personal secure lockers, and shared lounge access.</p>
+                <div class="card-bottom">
+                    <div class="price-tag">$12 <span>/ night</span></div>
+                    <button class="book-btn" onclick="openBooking('Backpacker Shared Dorm Room')" id="r4-btn">Book Now</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="glass-card">
+            <img src="villa.jpg" alt="Small Villa">
+            <div class="glass-card-info">
+                <h2 id="r5-title">Private Tropical Villa</h2>
+                <div class="stars">★★★★★ <span>(5.0/5 - 82 Reviews)</span></div>
+                <p id="r5-desc">Ultimate privacy and luxury! Enjoy your own secluded tropical garden, private plunge pool, outdoor rain shower, and 24/7 personal butler service.</p>
+                <div class="card-bottom">
+                    <div class="price-tag">$250 <span>/ night</span></div>
+                    <button class="book-btn" onclick="openBooking('Private Tropical Villa')" id="r5-btn">Book Now</button>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-card">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+
+            <h2 id="modal-title" style="color: #f39c12; font-size: 1.3rem; margin-bottom: 0.4rem; text-align: center;">
+                Thank You For Choosing Grand Hotel!
+            </h2>
+            <p id="modal-subtitle" style="font-size: 0.85rem; color: #ddd; text-align: center; margin-bottom: 0.8rem;">
+                Please scan the QR code to complete your payment and let us know your special requests.
+            </p>
+
+            <div style="text-align: center;">
+                <div class="qr-box-small">
+                    <img src="qr.jpg" alt="Payment QR Code">
+                </div>
+                <p id="qr-desc" style="font-size: 0.8rem; color: #ccc; margin-bottom: 0.8rem;">
+                    Scan using ABA Mobile, Bakong, or any Banking App in Cambodia.
+                </p>
+            </div>
+
+            <form class="request-form" onsubmit="handleModalSubmit(event)">
+                <div class="form-group">
+                    <label id="lbl-selected-room" style="color: #2ecc71; font-weight: bold; font-size: 0.95rem; text-align: center;"></label>
+                </div>
+
+                <div class="form-group">
+                    <label id="lbl-name">Your Full Name</label>
+                    <input type="text" required placeholder="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label id="lbl-phone">Phone / Telegram Number</label>
+                    <input type="tel" required placeholder="+855 12 345 678">
+                </div>
+
+                <div class="form-group">
+                    <label id="lbl-requests">Special Preparation Requests</label>
+                    <textarea rows="3" placeholder="e.g., Late check-in, extra pillows, airport pickup..."></textarea>
+                </div>
+
+                <button type="submit" class="confirm-btn" id="btn-submit" style="width: 100%; margin-top: 5px;">
+                    Confirm Payment & Requests
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                navHome: "Home",
+                navAbout: "About Us",
+                navBook: "Book Place",
+                navContact: "Contact Us",
+                bookHeroTitle: "Book Your Stay",
+                bookHeroSubtitle: "Choose from our luxury suites, private villas, or budget rooms with the best price guarantee.",
+                r1Title: "Deluxe One Bed Room",
+                r1Desc: "Perfect for couples or solo travelers. Features a king-sized plush bed, private balcony with city views, high-speed Wi-Fi, and complimentary breakfast.",
+                r2Title: "Executive Two Bed Room",
+                r2Desc: "Spacious room with two queen beds, modern workstation, marble bathroom with bathtub, and full access to our rooftop lounge.",
+                r3Title: "Grand Family Suite",
+                r3Desc: "Designed for comfort and privacy with separate sleeping areas, 1 king bed, 2 twin beds, a cozy living room, and free kids' breakfast meals.",
+                r4Title: "Backpacker Shared Dorm Room",
+                r4Desc: "Ideal for backpackers and social travelers. Features comfortable bunk beds with private privacy curtains, personal secure lockers, and shared lounge access.",
+                r5Title: "Private Tropical Villa",
+                r5Desc: "Ultimate privacy and luxury! Enjoy your own secluded tropical garden, private plunge pool, outdoor rain shower, and 24/7 personal butler service.",
+                btnText: "Book Now",
+                modalTitle: "Thank You For Choosing Grand Hotel!",
+                modalSubtitle: "Please scan the QR code to complete your payment and let us know your special requests.",
+                qrDesc: "Scan using ABA Mobile, Bakong, or any Banking App in Cambodia.",
+                lblName: "Your Full Name",
+                lblPhone: "Phone / Telegram Number",
+                lblRequests: "Special Preparation Requests",
+                btnSubmit: "Confirm Payment & Requests"
+            },
+            km: {
+                navHome: "ទំព័រដើម",
+                navAbout: "អំពីយើង",
+                navBook: "កក់កន្លែង",
+                navContact: "ទំនាក់ទំនង",
+                bookHeroTitle: "កក់បន្ទប់ ឬទីតាំងរបស់អ្នក",
+                bookHeroSubtitle: "ជ្រើសរើសបន្ទប់គេងប្រណិត វីឡាផ្ទាល់ខ្លួន ឬបន្ទប់តម្លៃសមរម្យជាមួយការធានាតម្លៃល្អបំផុត។",
+                r1Title: "បន្ទប់គេងទោល Deluxe (គ្រែ១)",
+                r1Desc: "ល្អឥតខ្ចោះសម្រាប់គូស្នេហ៍ ឬអ្នកធ្វើដំណើរម្នាក់ឯង។ មានគ្រែធំ King-size វ៉េរ៉ង់ដាទស្សនាទិដ្ឋភាពក្រុង អ៊ីនធឺណិតល្បឿនលឿន និងអាហារពេលព្រឹកដោយឥតគិតថ្លៃ។",
+                r2Title: "បន្ទប់គេងគូ Executive (គ្រែ២)",
+                r2Desc: "បន្ទប់ធំទូលាយមានគ្រែ Queen ពីរ តុធ្វើការទំនើប បន្ទប់ទឹកម៉ាបមានអាងងូតទឹក និងសិទ្ធិចូលប្រើប្រាស់បារលើដំបូល។",
+                r3Title: "បន្ទប់គ្រួសារ Grand Family Suite",
+                r3Desc: "រចនាឡើងសម្រាប់ភាពទូលាយ និងផាសុកភាព មានគ្រែ King ១ គ្រែទោល ២ បន្ទប់ទទួលភ្ញៀវ និងអាហារពេលព្រឹកឥតគិតថ្លៃសម្រាប់កុមារ។",
+                r4Title: "បន្ទប់ស្នាក់នៅរួម Backpacker (Dorm)",
+                r4Desc: "ស័ក្តិសមសម្រាប់អ្នកធ្វើដំណើរកម្សាន្តលក្ខណៈសន្សំសំចៃ។ មានគ្រែជាន់មានវាំងននបិទបាំងភាពផ្ទាល់ខ្លួន ទូសោភ័ណសុវត្ថិភាព និងកន្លែងសម្រាករួម។",
+                r5Title: "វីឡាផ្ទាល់ខ្លួនបែបធម្មជាតិ (Small Villa)",
+                r5Desc: "ភាពឯកជន និងភាពស៊ីវិល័យកម្រិតខ្ពស់! រីករាយជាមួយសួនច្បារផ្ទាល់ខ្លួន អាងហែលទឹកស្អាត ផ្កាឈូកក្រៅផ្ទះ និងសេវាកម្មបម្រើ ២៤ ម៉ោង។",
+                btnText: "កក់ឥឡូវនេះ",
+                modalTitle: "សូមអរគុណសម្រាប់ការជ្រើសរើស Grand Hotel!",
+                modalSubtitle: "សូមធ្វើការស្កេន QR Code ខាងក្រោមដើម្បីទូទាត់ប្រាក់ និងបញ្ជាក់សំណូមពរពិសេស។",
+                qrDesc: "ស្កេនតាមរយៈកម្មវិធី ABA Mobile, Bakong ឬកម្មវិធីធនាគារនានាក្នុងប្រទេសកម្ពុជា។",
+                lblName: "ឈ្មោះពេញរបស់អ្នក",
+                lblPhone: "លេខទូរស័ព្ទ / Telegram",
+                lblRequests: "សំណូមពរនៃការរៀបចំពិសេស",
+                btnSubmit: "បញ្ជាក់ការទូទាត់ និងផ្ញើសំណូមពរ"
+            }
+        };
+
+        function changeLanguage() {
+            const selectedLang = document.getElementById("langSelector").value;
+            const langData = translations[selectedLang];
+
+            document.getElementById("nav-home").textContent = langData.navHome;
+            document.getElementById("nav-about").textContent = langData.navAbout;
+            document.getElementById("nav-book").textContent = langData.navBook;
+            document.getElementById("nav-contact").textContent = langData.navContact;
+
+            document.getElementById("book-hero-title").textContent = langData.bookHeroTitle;
+            document.getElementById("book-hero-subtitle").textContent = langData.bookHeroSubtitle;
+
+            document.getElementById("r1-title").textContent = langData.r1Title;
+            document.getElementById("r1-desc").textContent = langData.r1Desc;
+
+            document.getElementById("r2-title").textContent = langData.r2Title;
+            document.getElementById("r2-desc").textContent = langData.r2Desc;
+
+            document.getElementById("r3-title").textContent = langData.r3Title;
+            document.getElementById("r3-desc").textContent = langData.r3Desc;
+
+            document.getElementById("r4-title").textContent = langData.r4Title;
+            document.getElementById("r4-desc").textContent = langData.r4Desc;
+
+            document.getElementById("r5-title").textContent = langData.r5Title;
+            document.getElementById("r5-desc").textContent = langData.r5Desc;
+
+            const btns = document.querySelectorAll('.book-btn');
+            btns.forEach(btn => btn.textContent = langData.btnText);
+
+            document.getElementById("modal-title").textContent = langData.modalTitle;
+            document.getElementById("modal-subtitle").textContent = langData.modalSubtitle;
+            document.getElementById("qr-desc").textContent = langData.qrDesc;
+            document.getElementById("lbl-name").textContent = langData.lblName;
+            document.getElementById("lbl-phone").textContent = langData.lblPhone;
+            document.getElementById("lbl-requests").textContent = langData.lblRequests;
+            document.getElementById("btn-submit").textContent = langData.btnSubmit;
+        }
+
+        // Modal triggers
+        function openBooking(roomName) {
+            document.getElementById("lbl-selected-room").textContent = "Selected: " + roomName;
+            document.getElementById("paymentModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("paymentModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("paymentModal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function handleModalSubmit(event) {
+            event.preventDefault();
+            alert("Thank you! Your booking details, payment, and special requests have been submitted successfully.");
+            closeModal();
+        }
+    </script>
+
+</body>
+</html>

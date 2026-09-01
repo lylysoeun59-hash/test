@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Grand Hotel</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-image: url('hotel.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: rgba(13, 71, 25, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #f39c12;
+        }
+
+        .lang-select {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: none;
+            background-color: #fff;
+            color: #333;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .hero {
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            max-width: 1000px;
+            margin: 2rem auto 0 auto;
+        }
+
+        .hero h1 {
+            margin-bottom: 0.5rem;
+            color: #f39c12;
+        }
+
+        /* Container - takes full width available */
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-width: 1000px;
+            margin: 2.5rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Full-width Glass Card Layout */
+        .glass-card {
+            background: rgb(97, 94, 94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            display: flex;
+            flex-direction: row; /* Image on left, text on right */
+            align-items: center;
+            gap: 20px;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.35);
+            background: rgb(12, 9, 9);
+        }
+
+        /* Image fixed size inside full-width card */
+        .glass-card img {
+            width: 320px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
+        }
+
+        .glass-card-text {
+            flex-grow: 1;
+        }
+
+        .glass-card h2 {
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+            color: #f39c12;
+        }
+
+        .glass-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #f1f1f1;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .glass-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .glass-card img {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Grand Hotel</div>
+        <nav>
+            <a href="index.html" id="nav-home">Home</a>
+            <a href="about us.html" id="nav-about">About Us</a>
+            <a href="book place.html" id="nav-book">Book Place</a>
+            <a href="contact us.html" id="nav-contact">Contact Us</a>
+            
+            <select class="lang-select" id="langSelector" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="km">ភាសាខ្មែរ (Khmer)</option>
+            </select>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1 id="about-hero-title">Discover Our Story</h1>
+        <p id="about-hero-subtitle">Your gateway to luxury, culture, and unforgettable local adventures.</p>
+    </section>
+
+    <main class="content-container">
+        
+        <article class="glass-card">
+            <div class="glass-card-text">
+                <h2 id="special-title">What Makes Us Special</h2>
+                <p id="special-desc">At Grand Hotel, we combine authentic local hospitality with modern luxury standards. Nestled in a prime location, our property offers serene tropical landscapes, hand-crafted interior architecture, and a peaceful escape while keeping you just minutes away from major city landmarks and nightlife destinations.</p>
+            </div>
+        </article>
+
+        <article class="glass-card">
+            <img src="food.jpg" alt="Restaurant & Breakfast">
+            <div class="glass-card-text">
+                <h2 id="dining-title">Gourmet Dining & Breakfast</h2>
+                <p id="dining-desc">Start your mornings with our complimentary buffet featuring a rich blend of traditional Khmer dishes and international Western breakfasts. Our on-site restaurant serves fresh organic meals prepared by top local chefs throughout the day.</p>
+            </div>
+        </article>
+
+        <article class="glass-card">
+            <img src="spa.jpg" alt="Spa and Wellness">
+            <div class="glass-card-text">
+                <h2 id="spa-title">Wellness & Luxury Spa</h2>
+                <p id="spa-desc">Rejuvenate your body and mind at our full-service spa center. Choose from traditional Khmer herbal massages, oil aromatherapy, body scrubs, and sauna sessions designed to melt away your travel stress.</p>
+            </div>
+        </article>
+
+        <article class="glass-card">
+            <img src="guide.jpg" alt="Guided Tours">
+            <div class="glass-card-text">
+                <h2 id="tour-title">Guided Tours & Local Guides</h2>
+                <p id="tour-desc">Explore regional temples, historic landmarks, and hidden local gems with our certified multi-lingual tour guides. We organize personalized private day tours and group excursions customized to your schedule.</p>
+            </div>
+        </article>
+
+        <article class="glass-card">
+            <img src="moto.jpg" alt="Motorbike and Bicycle Rentals">
+            <div class="glass-card-text">
+                <h2 id="rental-title">Motorbike & Bicycle Rentals</h2>
+                <p id="rental-desc">Explore the town on your own schedule! We offer reliable automatic motorbikes, city bicycles, and helmet gear for daily or hourly rentals directly from our front desk with free road assistance.</p>
+            </div>
+        </article>
+
+        <article class="glass-card">
+            <img src="club.jpg" alt="Lounge and Nightlife">
+            <div class="glass-card-text">
+                <h2 id="club-title">Rooftop Lounge & Club Partnerships</h2>
+                <p id="club-desc">Enjoy sunset cocktails at our exclusive hotel rooftop lounge. Guests also receive VIP access, free entry tickets, and drink discounts at our partner nightlife clubs and music venues across the city.</p>
+            </div>
+        </article>
+
+    </main>
+
+    <script>
+        const translations = {
+            en: {
+                navHome: "Home",
+                navAbout: "About Us",
+                navBook: "Book Place",
+                navContact: "Contact Us",
+                aboutHeroTitle: "Discover Our Story",
+                aboutHeroSubtitle: "Your gateway to luxury, culture, and unforgettable local adventures.",
+                specialTitle: "What Makes Us Special",
+                specialDesc: "At Grand Hotel, we combine authentic local hospitality with modern luxury standards. Nestled in a prime location, our property offers serene tropical landscapes, hand-crafted interior architecture, and a peaceful escape while keeping you just minutes away from major city landmarks and nightlife destinations.",
+                diningTitle: "Gourmet Dining & Breakfast",
+                diningDesc: "Start your mornings with our complimentary buffet featuring a rich blend of traditional Khmer dishes and international Western breakfasts. Our on-site restaurant serves fresh organic meals prepared by top local chefs throughout the day.",
+                spaTitle: "Wellness & Luxury Spa",
+                spaDesc: "Rejuvenate your body and mind at our full-service spa center. Choose from traditional Khmer herbal massages, oil aromatherapy, body scrubs, and sauna sessions designed to melt away your travel stress.",
+                tourTitle: "Guided Tours & Local Guides",
+                tourDesc: "Explore regional temples, historic landmarks, and hidden local gems with our certified multi-lingual tour guides. We organize personalized private day tours and group excursions customized to your schedule.",
+                rentalTitle: "Motorbike & Bicycle Rentals",
+                rentalDesc: "Explore the town on your own schedule! We offer reliable automatic motorbikes, city bicycles, and helmet gear for daily or hourly rentals directly from our front desk with free road assistance.",
+                clubTitle: "Rooftop Lounge & Club Partnerships",
+                clubDesc: "Enjoy sunset cocktails at our exclusive hotel rooftop lounge. Guests also receive VIP access, free entry tickets, and drink discounts at our partner nightlife clubs and music venues across the city."
+            },
+            km: {
+                navHome: "ទំព័រដើម",
+                navAbout: "អំពីយើង",
+                navBook: "កក់កន្លែង",
+                navContact: "ទំនាក់ទំនង",
+                aboutHeroTitle: "ស្វែងយល់ពីប្រវត្តិនៃសណ្ឋាគារយើង",
+                aboutHeroSubtitle: "ច្រកទ្វាររបស់អ្នកទៅកាន់ភាពស៊ីវិល័យ វប្បធម៌ និងការកម្សាន្តដ៏អស្ចារ្យ។",
+                specialTitle: "ចំណុចពិសេសរបស់យើង",
+                specialDesc: "នៅសណ្ឋាគារ ហ្គ្រេន យើងរួមបញ្ចូលគ្នានូវបដិសណ្ឋារកិច្ចបែបខ្មែរយ៉ាងកក់ក្តៅ ជាមួយនឹងស្តង់ដារទំនើប។ ស្ថិតនៅទីតាំងដ៏ល្អឥតខ្ចោះ សណ្ឋាគារយើងមានបរិយាកាសធម្មជាតិបៃតង ស្ថាបត្យកម្មដ៏ប្រណិត និងភាពស្ងប់ស្ងាត់ ខណៈដែលស្ថិតនៅជិតតំបន់ប្រវត្តិសាស្ត្រ និងតំបន់កម្សាន្ត។",
+                diningTitle: "អាហារដ្ឋាន និងអាហារពេលព្រឹក",
+                diningDesc: "ចាប់ផ្តើមព្រឹកព្រលឹមរបស់អ្នកជាមួយអាហារប៊ូហ្វេដោយឥតគិតថ្លៃ ដែលមានជម្រើសអាហារខ្មែរបុរាណ និងអាហារប៉ែកអឺរ៉ុប។ ភោជនីយដ្ឋានរបស់យើងបម្រើជូននូវអាហារស្រស់ៗចម្អិនដោយចុងភៅជំនាញពេញមួយថ្ងៃ។",
+                spaTitle: "សេវាកម្មស្ប៉ា និងថែរក្សាសុខភាព",
+                spaDesc: "សម្រាកកាយ និងចិត្តរបស់អ្នកនៅមជ្ឈមណ្ឌលស្ប៉ារបស់យើង។ ជ្រើសរើសការម៉ッサージ បែបបុរាណខ្មែរ ការប្រើប្រាស់ប្រេងក្រអូប ការខាត់ស្បែក និងការស្ពង់ដើម្បីបាត់បង់ការនឿយហត់។",
+                tourTitle: "សេវាកម្មទេសចរណ៍ និងមគ្គុទ្ទេសក៍",
+                tourDesc: "ទស្សនាប្រាសាទបុរាណ តំបន់ប្រវត្តិសាស្ត្រ និងកន្លែងកម្សាន្តស្អាតៗជាមួយមគ្គុទ្ទេសក៍ទេសចរណ៍ (អ្នកនាំផ្លូវ) ជំនាញច្រើនភាសារបស់យើង។ យើងមានការរៀបចំដំណើរកម្សាន្តផ្ទាល់ខ្លួន និងជាក្រុម។",
+                rentalTitle: "សេវាកម្មជួលម៉ូតូ និងកង់",
+                rentalDesc: "ធ្វើដំណើរកម្សាន្តក្នុងក្រុងដោយសេរី! យើងមានសេវាកម្មជួលម៉ូតូអូតូ និងកង់ប្រកបដោយសុវត្ថិភាព ព្រមទាំងមួកសុវត្ថិភាព រួមទាំងការជួយសង្គ្រោះតាមផ្លូវដោយឥតគិតថ្លៃ។",
+                clubTitle: "បារលើដំបូល និងក្លឹបកម្សាន្ត",
+                clubDesc: "រីករាយជាមួយស្រាក្រឡុកនៅបារលើដំបូល (Rooftop Lounge)។ ភ្ញៀវសណ្ឋាគារនឹងទទួលបានការចូលរួម VIP សំបុត្រចូលរួមដោយឥតគិតថ្លៃ និងការបញ្ចុះតម្លៃនៅក្លឹបកម្សាន្តដៃគូក្នុងក្រុង។"
+            }
+        };
+
+        function changeLanguage() {
+            const selectedLang = document.getElementById("langSelector").value;
+            const langData = translations[selectedLang];
+
+            document.getElementById("nav-home").textContent = langData.navHome;
+            document.getElementById("nav-about").textContent = langData.navAbout;
+            document.getElementById("nav-book").textContent = langData.navBook;
+            document.getElementById("nav-contact").textContent = langData.navContact;
+
+            document.getElementById("about-hero-title").textContent = langData.aboutHeroTitle;
+            document.getElementById("about-hero-subtitle").textContent = langData.aboutHeroSubtitle;
+
+            document.getElementById("special-title").textContent = langData.specialTitle;
+            document.getElementById("special-desc").textContent = langData.specialDesc;
+
+            document.getElementById("dining-title").textContent = langData.diningTitle;
+            document.getElementById("dining-desc").textContent = langData.diningDesc;
+
+            document.getElementById("spa-title").textContent = langData.spaTitle;
+            document.getElementById("spa-desc").textContent = langData.spaDesc;
+
+            document.getElementById("tour-title").textContent = langData.tourTitle;
+            document.getElementById("tour-desc").textContent = langData.tourDesc;
+
+            document.getElementById("rental-title").textContent = langData.rentalTitle;
+            document.getElementById("rental-desc").textContent = langData.rentalDesc;
+
+            document.getElementById("club-title").textContent = langData.clubTitle;
+            document.getElementById("club-desc").textContent = langData.clubDesc;
+        }
+    </script>
+
+</body>
+</html>
