@@ -13,29 +13,33 @@
         }
 
         body {
-            background-image: url('bg1.jpg');
+            background-image: url('hotel.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            color: #333;
+            color: #fff;
             min-height: 100vh;
         }
 
         header {
-            background-color: #0d4719;
+            background-color: rgba(13, 71, 25, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             color: #fff;
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: 50px;
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            height: 50px;
-            border-radius: 20px;
         }
 
         nav {
@@ -66,46 +70,62 @@
         }
 
         .hero {
-    padding: 4rem 2rem;
-    text-align: center;
-    color: #fff;
-    
-    /* Glassmorphism Effect */
-    background: rgba(255, 255, 255, 0.15); /* Low opacity white tint */
-    backdrop-filter: blur(10px);          /* Blurs the body image behind it */
-    -webkit-backdrop-filter: blur(10px);  /* Safari support */
-    
-    /* Optional enhancements for depth */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-    
-    /* Margin to separate from header */
-    max-width: 800px;
-    margin: 2rem auto 0 auto;
-}
+            padding: 4rem 2rem;
+            text-align: center;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 2rem auto 0 auto;
+        }
 
         .hero h1 {
             margin-bottom: 1rem;
         }
 
-        .content-section {
-            max-width: 800px;
+        /* Container for the 3 glass cards */
+        .glass-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
 
-        .card {
-            background: #fff;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        /* Glassmorphism style for content cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .card h2 {
-            margin-bottom: 0.5rem;
-            color: #1a252f;
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.35);
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        .glass-card h2 {
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+            color: #f39c12;
+        }
+
+        .glass-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #f1f1f1;
         }
     </style>
 </head>
@@ -131,6 +151,24 @@
         <p id="hero-subtitle">Experience luxury and comfort in the heart of the city.</p>
     </section>
 
+    <!-- Three Glassmorphism Cards -->
+    <main class="glass-grid">
+        <article class="glass-card" id="home">
+            <h2 id="home-title">Luxury Rooms</h2>
+            <p id="home-desc">Discover our world-class amenities and premium rooms designed for your relaxation.</p>
+        </article>
+
+        <article class="glass-card" id="about">
+            <h2 id="about-title">About Us</h2>
+            <p id="about-desc">We are dedicated to offering exceptional hospitality services with over 20 years of excellence.</p>
+        </article>
+
+        <article class="glass-card" id="book">
+            <h2 id="book-title">Book Place</h2>
+            <p id="book-desc">Reserve your room or event space online easily with best price guarantees.</p>
+        </article>
+    </main>
+
     <script>
         const translations = {
             en: {
@@ -140,7 +178,7 @@
                 navContact: "Contact Us",
                 heroTitle: "Welcome to Grand Hotel",
                 heroSubtitle: "Experience luxury and comfort in the heart of the city.",
-                homeTitle: "Home",
+                homeTitle: "Luxury Rooms",
                 homeDesc: "Discover our world-class amenities and premium rooms designed for your relaxation.",
                 aboutTitle: "About Us",
                 aboutDesc: "We are dedicated to offering exceptional hospitality services with over 20 years of excellence.",
@@ -156,7 +194,7 @@
                 navContact: "ទំនាក់ទំនង",
                 heroTitle: "សូមស្វាគមន៍មកកាន់ សណ្ឋាគារ ហ្គ្រេន",
                 heroSubtitle: "បទពិសោធន៍នៃភាពស៊ីវិល័យ និងផាសុកភាពនៅកណ្តាលទីក្រុង។",
-                homeTitle: "ទំព័រដើម",
+                homeTitle: "បន្ទប់សម្រាកដ៏ប្រណិត",
                 homeDesc: "ស្វែងយល់ពីសេវាកម្មកម្រិតពិភពលោក និងបន្ទប់សម្រាកដ៏ប្រណិតរបស់យើង។",
                 aboutTitle: "អំពីយើង",
                 aboutDesc: "យើងប្តេជ្ញាផ្តល់ជូននូវសេវាកម្មបដិសណ្ឋារកិច្ចដ៏ពិសេសជាមួយនឹងបទពិសោធន៍ជាង ២០ ឆ្នាំ។",
@@ -187,9 +225,6 @@
 
             document.getElementById("book-title").textContent = langData.bookTitle;
             document.getElementById("book-desc").textContent = langData.bookDesc;
-
-            document.getElementById("contact-title").textContent = langData.contactTitle;
-            document.getElementById("contact-desc").textContent = langData.contactDesc;
         }
     </script>
 
